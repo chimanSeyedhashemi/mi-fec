@@ -30,3 +30,7 @@ export interface StringObject {
 export interface MapObject<T> {
    [key: string]: T;
 }
+
+export interface FormField<T> {
+  isValid:boolean, value:T
+}

@@ -6,6 +6,7 @@ import { translation } from './common/translation';
 import { CreateVideoButton } from './components/video/create-video-button';
 import { Provider } from 'react-redux';
 import { persistor, Store } from './redux/store';
+import { CreateVideo } from './components/video/create-video';
 import { PersistGate } from 'redux-persist/integration/react';
 
 const App: React.FC = () => {
@@ -21,6 +22,14 @@ const App: React.FC = () => {
                 element={
                   <Layout NavbarProps={{ activePageLabel: translation.videos, rightComponent: <CreateVideoButton /> }}>
                     <Videos />
+                  </Layout>
+                }
+              />
+              <Route
+                path={PATH.CREATE_VIDEO}
+                element={
+                  <Layout NavbarProps={{ activePageLabel: translation.videos }}>
+                    <CreateVideo />
                   </Layout>
                 }
               />
