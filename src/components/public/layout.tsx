@@ -7,7 +7,7 @@ interface IProps {
   NavbarProps?: INavbarProps;
 }
 
-const DashboardLayoutRoot = styled('div')(({ theme }) => ({
+const LayoutRoot = styled('div')(() => ({
   display: 'flex',
   flex: '1 1 auto',
   maxWidth: '100%',
@@ -17,7 +17,7 @@ const DashboardLayoutRoot = styled('div')(({ theme }) => ({
 export const Layout: FC<IProps> = ({ children, NavbarProps }) => {
   return (
     <>
-      <DashboardLayoutRoot>
+      <LayoutRoot>
         <Box
           sx={{
             display: 'flex',
@@ -27,7 +27,7 @@ export const Layout: FC<IProps> = ({ children, NavbarProps }) => {
           }}>
           {children}
         </Box>
-      </DashboardLayoutRoot>
+      </LayoutRoot>
       <Navbar {...NavbarProps} />
     </>
   );
