@@ -13,5 +13,10 @@ export const translation: StringObject = {
     options: "Options",
     edit: "Edit",
     delete: "Delete",
-    addVideo:"Add Video"
+    addVideo: "Add Video",
+    videoAuthor: "Video Author",
+    videoCategory: "Video Category",
+    submit: "Submit",
+    cancel:"Cancel"
+    
 }
