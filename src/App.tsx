@@ -5,26 +5,29 @@ import { Layout } from './components/public/layout';
 import { translation } from './common/translation';
 import { CreateVideoButton } from './components/video/create-video-button';
 import { Provider } from 'react-redux';
-import { Store } from './redux/store';
+import { persistor, Store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const App: React.FC = () => {
   return (
     <>
       <Provider store={Store}>
-        <Router>
-          <Routes>
-            <Route path={PATH.MAIN} element={<Navigate to={PATH.VIDEOS} replace />} />
-            <Route
-              path={PATH.VIDEOS}
-              element={
-                <Layout NavbarProps={{ activePageLabel: translation.videos, rightComponent: <CreateVideoButton /> }}>
-                  <Videos />
-                </Layout>
-              }
-            />
-            <Route path="*" element={<Navigate to={PATH.MAIN} replace />} />
-          </Routes>
-        </Router>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router>
+            <Routes>
+              <Route path={PATH.MAIN} element={<Navigate to={PATH.VIDEOS} replace />} />
+              <Route
+                path={PATH.VIDEOS}
+                element={
+                  <Layout NavbarProps={{ activePageLabel: translation.videos, rightComponent: <CreateVideoButton /> }}>
+                    <Videos />
+                  </Layout>
+                }
+              />
+              <Route path="*" element={<Navigate to={PATH.MAIN} replace />} />
+            </Routes>
+          </Router>
+        </PersistGate>
       </Provider>
     </>
   );
