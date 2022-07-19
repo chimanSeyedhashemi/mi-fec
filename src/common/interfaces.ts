@@ -21,3 +21,7 @@ export interface ProcessedVideo {
   author: string;
   categories: string[];
 }
+
+export interface StringObject {
+   [key: string]: string;
+}
