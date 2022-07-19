@@ -16,11 +16,6 @@ export const Videos: React.FC = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Videos</Typography>
-        </Toolbar>
-      </AppBar>
       <Container>
         <VideosTable videos={videos} />
       </Container>

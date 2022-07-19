@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-d
 import { PATH } from './common/enums/path.enum';
 import { Videos } from './components/video/videos';
 import { Layout } from './components/public/layout';
+import { translation } from './common/translation';
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const App: React.FC = () => {
           <Route
             path={PATH.VIDEOS}
             element={
-              <Layout>
+              <Layout NavbarProps={{ activePageLabel: translation.videos }}>
                 <Videos />
               </Layout>
             }
