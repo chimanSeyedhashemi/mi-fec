@@ -1,4 +1,5 @@
 export enum PATH {
     MAIN = "/",
-    VIDEOS = "/videos"
+    VIDEOS = "/videos",
+    CREATE_VIDEO="/videos/create"
 }
