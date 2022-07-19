@@ -3,16 +3,20 @@ import { Container, Typography } from '@mui/material';
 import { VideosTable } from './videos-table';
 import { getVideos } from '../../services/videos';
 import config from '../../common/config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setVideosAction } from '../../redux/action';
+import { IReduxState } from '../../redux/app-store';
 
 export const Videos: React.FC = () => {
   const dispatch = useDispatch();
+  const { videos } = useSelector((store: IReduxState) => store);
 
   useEffect(() => {
-    getVideos().then((videos) => {
-      dispatch(setVideosAction(videos));
-    });
+    if (!videos) {
+      getVideos().then((videos) => {
+        dispatch(setVideosAction(videos));
+      });
+    }
   }, []);
 
   return (

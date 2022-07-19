@@ -8,14 +8,14 @@ import { IReduxState } from '../../redux/app-store';
 
 const tableHeader: Array<string> = ['videoName', 'author', 'categories', 'highestQualityFormat', 'releaseDate', 'options'];
 
-  /**
-   * @params Video formats
-   * @return string
-   */
+/**
+ * @params Video formats
+ * @return string
+ */
 
 export const highestQualityFormat = (formats: MapObject<VideoFormat>): string => {
   let result = '';
-  
+
   const formatsEntries = Object.entries(formats);
   formatsEntries.sort((a, b) => a[1].size - b[1].size);
   formatsEntries.reverse();
@@ -49,7 +49,7 @@ export const VideosTable: React.FC<{}> = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {videos.map((video) => (
+          {videos?.map((video) => (
             <StyledTableRow key={video.id}>
               <TableCell component="th" scope="row">
                 {video.name}
