@@ -3,10 +3,16 @@ export interface Category {
   name: string;
 }
 
+export interface VideoFormat{
+  res: string;
+  size:number
+}
 export interface Video {
   id: number;
   catIds: number[];
   name: string;
+  releaseDate: string;
+  formats:MapObject<VideoFormat>
 }
 
 export interface Author {
@@ -15,13 +21,12 @@ export interface Author {
   videos: Video[];
 }
 
-export interface ProcessedVideo {
-  id: number;
-  name: string;
-  author: string;
-  categories: string[];
-}
+
 
 export interface StringObject {
    [key: string]: string;
+}
+
+export interface MapObject<T> {
+   [key: string]: T;
 }
