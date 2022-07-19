@@ -1,23 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Container, Typography } from '@mui/material';
 import { VideosTable } from './videos-table';
 import { getVideos } from '../../services/videos';
-import { ProcessedVideo } from '../../common/interfaces';
+import config from '../../common/config';
+import { useDispatch } from 'react-redux';
+import { setVideosAction } from '../../redux/action';
 
-// TODO: update video page
 export const Videos: React.FC = () => {
-  const [videos, setVideos] = useState<ProcessedVideo[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getVideos().then((videos) => {
-      setVideos(videos);
+      dispatch(setVideosAction(videos));
     });
   }, []);
 
   return (
     <>
       <Container>
-        <VideosTable videos={videos} />
+        <Typography variant="h4">
+          <span>{config.documentTitle}</span>
+          <span>{config.DocumentVersion}</span>
+        </Typography>
+        {/* //TODO: Implement search video */}
+        <VideosTable />
       </Container>
     </>
   );
