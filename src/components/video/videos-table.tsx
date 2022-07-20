@@ -3,10 +3,11 @@ import { Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, Tabl
 import { MapObject, VideoFormat } from '../../common/interfaces';
 import { translation } from '../../common/translation';
 import { styled } from '@mui/material/styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IReduxState } from '../../redux/app-store';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../common/enums/path.enum';
+import { setVideosAction } from '../../redux/action';
 
 const tableHeader: Array<string> = ['videoName', 'author', 'categories', 'highestQualityFormat', 'releaseDate', 'options'];
 
@@ -37,10 +38,15 @@ export const highestQualityFormat = (formats: MapObject<VideoFormat>): string =>
 
 export const VideosTable: React.FC<{}> = () => {
   const { videos } = useSelector((store: IReduxState) => store);
+  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const handleEdit = (videoId: number) => {
     navigate(PATH.EDIT_VIDEO + `?id=${videoId}`);
+  };
+
+  const handleDelete = (videoId: number) => {
+    videos && dispatch(setVideosAction(videos?.filter((video) => video.id !== videoId)));
   };
 
   return (
@@ -67,12 +73,11 @@ export const VideosTable: React.FC<{}> = () => {
               <TableCell>{video.releaseDate}</TableCell>
               <TableCell>
                 <Stack direction="row" spacing={1} alignItems={'center'}>
-                  {/* //TODO: Edit Video */}
                   <Button variant="contained" onClick={() => handleEdit(video.id)}>
                     {translation.edit}
                   </Button>
-                  {/* //TODO: Delete Video */}
-                  <Button variant="contained" color="error">
+
+                  <Button variant="contained" color="error" onClick={() => handleDelete(video.id)}>
                     {translation.delete}
                   </Button>
                 </Stack>
