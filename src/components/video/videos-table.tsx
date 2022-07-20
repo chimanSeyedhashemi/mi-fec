@@ -31,7 +31,7 @@ export const VideosTable: React.FC<IProps> = ({ videos }) => {
   const handleDelete = (videoId: number) => {
     videos && dispatch(setVideosAction(videos?.filter((video) => video.id !== videoId)));
   };
-  console.log(videos);
+
   return (
     <TableContainer component={Paper}>
       <Table>
