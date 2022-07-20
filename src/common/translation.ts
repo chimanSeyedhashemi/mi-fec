@@ -18,6 +18,7 @@ export const translation: StringObject = {
     videoCategory: "Video Category",
     submit: "Submit",
     cancel: "Cancel",
-    editVideo:"Edit Video"
+    editVideo: "Edit Video",
+    search:"Search"
     
 }

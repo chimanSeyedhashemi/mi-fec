@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import { MapObject, VideoFormat } from '../../common/interfaces';
 import { translation } from '../../common/translation';
 import { styled } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { IReduxState } from '../../redux/app-store';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../../common/enums/path.enum';
 import { setVideosAction } from '../../redux/action';
+import { highestQualityFormat } from './highest-quality-format';
+import { ProcessedVideo } from '../../common/model/video.model';
 
 const tableHeader: Array<string> = ['videoName', 'author', 'categories', 'highestQualityFormat', 'releaseDate', 'options'];
 
@@ -16,28 +16,11 @@ const tableHeader: Array<string> = ['videoName', 'author', 'categories', 'highes
  * @return string
  */
 
-export const highestQualityFormat = (formats: MapObject<VideoFormat>): string => {
-  let result = '';
+interface IProps {
+  videos: Array<ProcessedVideo>;
+}
 
-  const formatsEntries = Object.entries(formats);
-  formatsEntries.sort((a, b) => a[1].size - b[1].size);
-  formatsEntries.reverse();
-
-  const highestQuality = formatsEntries.filter((format) => format[1].size === formatsEntries[0][1].size);
-
-  if (highestQuality.length > 1) {
-    highestQuality.sort((a, b) => Number(a[1].res.split('p')[0]) - Number(b[1].res.split('p')[0]));
-    highestQuality.reverse();
-    result = `${highestQuality[0][0]} ${highestQuality[0][1].res}`;
-  } else {
-    result = `${formatsEntries[0][0]} ${formatsEntries[0][1].res}`;
-  }
-
-  return result;
-};
-
-export const VideosTable: React.FC<{}> = () => {
-  const { videos } = useSelector((store: IReduxState) => store);
+export const VideosTable: React.FC<IProps> = ({ videos }) => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -48,9 +31,9 @@ export const VideosTable: React.FC<{}> = () => {
   const handleDelete = (videoId: number) => {
     videos && dispatch(setVideosAction(videos?.filter((video) => video.id !== videoId)));
   };
-
+  console.log(videos);
   return (
-    <TableContainer component={Paper} style={{ marginTop: '40px' }}>
+    <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
