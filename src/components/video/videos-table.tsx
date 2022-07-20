@@ -5,6 +5,8 @@ import { translation } from '../../common/translation';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import { IReduxState } from '../../redux/app-store';
+import { useNavigate } from 'react-router-dom';
+import { PATH } from '../../common/enums/path.enum';
 
 const tableHeader: Array<string> = ['videoName', 'author', 'categories', 'highestQualityFormat', 'releaseDate', 'options'];
 
@@ -35,6 +37,11 @@ export const highestQualityFormat = (formats: MapObject<VideoFormat>): string =>
 
 export const VideosTable: React.FC<{}> = () => {
   const { videos } = useSelector((store: IReduxState) => store);
+  let navigate = useNavigate();
+
+  const handleEdit = (videoId: number) => {
+    navigate(PATH.EDIT_VIDEO + `?id=${videoId}`);
+  };
 
   return (
     <TableContainer component={Paper} style={{ marginTop: '40px' }}>
@@ -61,7 +68,9 @@ export const VideosTable: React.FC<{}> = () => {
               <TableCell>
                 <Stack direction="row" spacing={1} alignItems={'center'}>
                   {/* //TODO: Edit Video */}
-                  <Button variant="contained">{translation.edit}</Button>
+                  <Button variant="contained" onClick={() => handleEdit(video.id)}>
+                    {translation.edit}
+                  </Button>
                   {/* //TODO: Delete Video */}
                   <Button variant="contained" color="error">
                     {translation.delete}
