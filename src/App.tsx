@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { persistor, Store } from './redux/store';
 import { CreateVideo } from './components/video/create-video';
 import { PersistGate } from 'redux-persist/integration/react';
+import { EditVideo } from './components/video/edit-video';
 
 const App: React.FC = () => {
   return (
@@ -30,6 +31,14 @@ const App: React.FC = () => {
                 element={
                   <Layout NavbarProps={{ activePageLabel: translation.videos }}>
                     <CreateVideo />
+                  </Layout>
+                }
+              />
+              <Route
+                path={PATH.EDIT_VIDEO}
+                element={
+                  <Layout NavbarProps={{ activePageLabel: translation.videos }}>
+                    <EditVideo />
                   </Layout>
                 }
               />

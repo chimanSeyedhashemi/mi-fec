@@ -17,6 +17,7 @@ export const translation: StringObject = {
     videoAuthor: "Video Author",
     videoCategory: "Video Category",
     submit: "Submit",
-    cancel:"Cancel"
+    cancel: "Cancel",
+    editVideo:"Edit Video"
     
 }
